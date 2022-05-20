@@ -18,8 +18,8 @@ import java.util.List;
 @Validated
 @RequiredArgsConstructor
 public class ProductController {
-    private final ProductServicePort productServicePort;
-    private final ModelMapper modelMapper;
+    private ProductServicePort productServicePort;
+    private ModelMapper modelMapper;
 
     @PostMapping()
     public ResponseEntity<Product> createProduct(@Valid @RequestBody ProductDTO productDTO){
