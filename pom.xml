@@ -75,6 +75,11 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>org.modelmapper.extensions</groupId>
+            <artifactId>modelmapper-spring</artifactId>
+            <version>3.1.0</version>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
