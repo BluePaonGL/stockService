@@ -2,6 +2,8 @@ package fr.isep.stockservice.application.DTO;
 
 import fr.isep.stockservice.domain.model.ProductType;
 import lombok.AccessLevel;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -14,6 +16,8 @@ import java.util.Date;
 import java.util.Set;
 
 // Manipulation des champs de l'objet
+@Data
+@NoArgsConstructor
 @Setter(value = AccessLevel.NONE)
 public class ProductDTO {
     @Id
@@ -29,9 +33,7 @@ public class ProductDTO {
     @NotNull
     @NotEmpty
     private ProductType type;
-    @DateTimeFormat
     private Date peremption_date;
-    @DateTimeFormat
     private Date comsumption_data;
     private Set<String> allergen_set;
     private Set<Long> id_lists;
