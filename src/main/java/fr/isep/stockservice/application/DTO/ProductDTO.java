@@ -33,8 +33,8 @@ public class ProductDTO {
     @NotNull
     @NotEmpty
     private ProductType type;
-    private Date peremption_date;
-    private Date comsumption_data;
-    private Set<String> allergen_set;
-    private Set<Long> id_lists;
+    private Date peremptionDate;
+    private Date consumptionData;
+    private String allergenSet = "";
+    private String idLists = "";
 }

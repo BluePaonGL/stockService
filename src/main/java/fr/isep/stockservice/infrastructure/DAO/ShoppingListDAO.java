@@ -14,7 +14,7 @@ import java.util.Set;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="'shoppingList'")
+@Table(name="shoppingList")
 public class ShoppingListDAO {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

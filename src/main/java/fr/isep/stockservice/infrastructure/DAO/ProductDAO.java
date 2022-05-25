@@ -17,7 +17,7 @@ import java.util.Set;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="'product'")
+@Table(name="product")
 public class ProductDAO {
     @Id
     private Long productId;
@@ -28,8 +28,9 @@ public class ProductDAO {
     private int quantity;
     private ProductType type;
     private Date peremptionDate;
-    private Date comsumptionDate;
-    private Set<String> allergenSet;
+    private Date consumptionDate;
+    private String allergenSet = "";
+    private String idLists = "";
 
     @OneToMany(targetEntity = fr.isep.stockservice.infrastructure.DAO.ShoppingListDAO.class)
     private Set<Long> idLists;

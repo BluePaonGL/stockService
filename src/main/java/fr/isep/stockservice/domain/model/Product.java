@@ -1,5 +1,6 @@
 package fr.isep.stockservice.domain.model;
 
+import com.google.common.annotations.VisibleForTesting;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,8 +23,22 @@ public class Product {
     private int quantity;
     private ProductType type;
     private Date peremptionDate;
-    private Date comsumptionDate;
-    private Set<String> allergenSet;
-    private Set<Long> idLists;
+    private Date consumptionDate;
+    private String allergenSet = "";
+    private String idLists = "";
+
+    public String addAllergen(String allergen) {
+        if (allergenSet.isEmpty()) {
+            return allergenSet = allergen;
+        }
+        return allergenSet += "," + allergen;
+    }
+
+    public String addShoppingListId(Long id) {
+        if (idLists.isEmpty()) {
+            return idLists = String.valueOf(id);
+        }
+        return idLists += "," + String.valueOf(id);
+    }
 
 }

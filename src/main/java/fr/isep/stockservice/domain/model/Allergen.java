@@ -21,5 +21,5 @@ public enum Allergen {
     public String getValue() {
         return value;
     }
-
+    
 }
