@@ -30,10 +30,10 @@ public class ProductDAO {
     private Date peremptionDate;
     private Date consumptionDate;
     private String allergenSet = "";
-    private String idLists = "";
 
-    @OneToMany(targetEntity = fr.isep.stockservice.infrastructure.DAO.ShoppingListDAO.class)
-    private Set<Long> idLists;
+    //@OneToMany(targetEntity = fr.isep.stockservice.infrastructure.DAO.ShoppingListDAO.class)
+    //@ToString.Exclude
+    //private Set<Integer> idLists;
 
     @Override
     public boolean equals(Object o) {

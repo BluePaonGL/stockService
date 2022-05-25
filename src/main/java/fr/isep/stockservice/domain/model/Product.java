@@ -25,7 +25,6 @@ public class Product {
     private Date peremptionDate;
     private Date consumptionDate;
     private String allergenSet = "";
-    private String idLists = "";
 
     public String addAllergen(String allergen) {
         if (allergenSet.isEmpty()) {
@@ -33,12 +32,12 @@ public class Product {
         }
         return allergenSet += "," + allergen;
     }
-
+/*
     public String addShoppingListId(Long id) {
         if (idLists.isEmpty()) {
             return idLists = String.valueOf(id);
         }
         return idLists += "," + String.valueOf(id);
     }
-
+*/
 }

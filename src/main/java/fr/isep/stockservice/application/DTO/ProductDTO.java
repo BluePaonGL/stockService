@@ -36,5 +36,4 @@ public class ProductDTO {
     private Date peremptionDate;
     private Date consumptionData;
     private String allergenSet = "";
-    private String idLists = "";
 }
