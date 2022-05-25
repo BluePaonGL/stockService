@@ -25,9 +25,8 @@ public class ProductDTO {
     private Long quantity;
     @NotNull
     @NotEmpty
-    //@Enumerated(value = EnumType.STRING)
     private ProductType type;
     private Date peremptionDate;
     private Date consumptionData;
-    //private String allergenSet = "";
+    private String allergenSet;
 }

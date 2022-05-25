@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 public interface ProductRepository extends JpaRepository<ProductDAO, Long>, JpaSpecificationExecutor<ProductDAO> {
-    ProductDAO findByProductID(Long id);
+    ProductDAO findByProductId(Long id);
 
     ProductDAO findByName(String name);
 }

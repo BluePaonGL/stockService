@@ -7,10 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 // Lien avec la BDD
 @Entity
@@ -36,7 +33,7 @@ public class ProductDAO {
     private Date peremptionDate;
     @Temporal(TemporalType.DATE)
     private Date consumptionDate;
-    //private String allergenSet = "";
+    private String allergenSet;
 
     //@OneToMany(targetEntity = fr.isep.stockservice.infrastructure.DAO.ShoppingListDAO.class)
     //@ToString.Exclude

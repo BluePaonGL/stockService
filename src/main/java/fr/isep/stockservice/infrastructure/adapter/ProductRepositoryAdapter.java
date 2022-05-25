@@ -21,7 +21,7 @@ public class ProductRepositoryAdapter implements ProductRepositoryPort {
 
     @Override
     public Product findById(Long userId) {
-        ProductDAO userDaoOptional = this.productRepository.findByProductID(userId);
+        ProductDAO userDaoOptional = this.productRepository.findByProductId(userId);
         try {
             return modelMapper.map(userDaoOptional, Product.class);
         } catch (Exception exception) {
