@@ -1,5 +1,9 @@
 package fr.isep.stockservice.domain.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
 public enum Allergen {
     GLUTEN("Gluten"),
     LACTOSE("Lactose"),
@@ -12,14 +16,7 @@ public enum Allergen {
     MUSTARD("Moutarde"),
     SESAME("Sésame");
 
+    @Getter
     private String value;
-
-    Allergen(String value) {
-        this.value = value;
-    }
-
-    public String getValue() {
-        return value;
-    }
     
 }
