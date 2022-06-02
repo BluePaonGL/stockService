@@ -11,13 +11,14 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Component
 // Les Adapters s'occupent de tout ce qui est filtrage/pagination
 public class ProductRepositoryAdapter implements ProductRepositoryPort {
     private ProductRepository productRepository;
-    private final ModelMapper modelMapper;
+    private ModelMapper modelMapper;
 
     @Override
     public Product findById(Long userId) {
@@ -47,7 +48,8 @@ public class ProductRepositoryAdapter implements ProductRepositoryPort {
 
     @Override
     public List<Product> findAll() {
-        return null;
+        List<ProductDAO> listDAO = this.productRepository.findAll();
+        return listDAO.stream().map(product -> modelMapper.map(product, Product.class)).collect(Collectors.toList());
     }
 
     @Override

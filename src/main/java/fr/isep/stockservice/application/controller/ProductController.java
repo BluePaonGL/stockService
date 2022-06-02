@@ -8,10 +8,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+//import javax.validation.Valid;
 import java.util.List;
 
 @Slf4j
@@ -25,12 +26,12 @@ public class ProductController {
     private ModelMapper modelMapper;
 
     @PostMapping()
-    public ResponseEntity<Product> createProduct(@Valid @RequestBody ProductDTO productDTO){
+    public ResponseEntity<Product> createProduct(@RequestBody ProductDTO productDTO){ //@Valid to add with Spring Security afterwards
         return ResponseEntity.ok(this.productServicePort.saveProduct(productDTO));
     }
 
     // Notre Stock ?
-    @GetMapping()
+    @GetMapping(value = "/productList")
     public ResponseEntity<List<Product>> getAllProduct(){
         return new ResponseEntity<>(this.productServicePort.getProducts(), HttpStatus.OK);
     }

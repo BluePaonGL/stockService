@@ -5,8 +5,9 @@ import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+//import javax.validation.constraints.NotEmpty;
+//import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
@@ -15,16 +16,16 @@ import java.util.Set;
 @NoArgsConstructor
 @Setter(value = AccessLevel.NONE)
 @Getter
-public class ProductDTO {
-    @NotNull
-    @NotEmpty
+public class ProductDTO implements Serializable {
+    //@NotNull
+    //@NotEmpty
     private String name;
     private String description;
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    //@NotEmpty
     private Long quantity;
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    //@NotEmpty
     private ProductType type;
     private Date peremptionDate;
     private Date consumptionData;

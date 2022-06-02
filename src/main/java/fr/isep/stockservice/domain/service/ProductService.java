@@ -6,7 +6,7 @@ import fr.isep.stockservice.domain.model.Product;
 import fr.isep.stockservice.domain.port.ProductRepositoryPort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.keycloak.admin.client.Keycloak;
+//import org.keycloak.admin.client.Keycloak;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -19,8 +19,8 @@ import java.util.List;
 @Slf4j
 public class ProductService implements ProductServicePort {
 
-    private final ProductRepositoryPort productRepositoryPort;
-    private final ModelMapper modelMapper;
+    private ProductRepositoryPort productRepositoryPort;
+    private ModelMapper modelMapper;
 
     @Override
     public Product saveProduct(ProductDTO productDTO) {
@@ -39,6 +39,6 @@ public class ProductService implements ProductServicePort {
 
     @Override
     public List<Product> getProducts() {
-        return null;
+        return productRepositoryPort.findAll();
     }
 }
