@@ -27,6 +27,6 @@ public class ProductDTO {
     @NotEmpty
     private ProductType type;
     private Date peremptionDate;
-    private Date consumptionData;
+    private Date consumptionDate;
     private String allergenSet;
 }
