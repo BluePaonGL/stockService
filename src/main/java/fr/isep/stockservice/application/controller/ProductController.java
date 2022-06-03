@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Slf4j
@@ -43,9 +42,9 @@ public class ProductController {
         return new ResponseEntity<>(this.productServicePort.getProductById(id), HttpStatus.OK);
     }
 
-    @RequestMapping(value="/products/findProductByName/{Name}", method= RequestMethod.GET)
+    @RequestMapping(value="/products/findProductByName/{name}", method= RequestMethod.GET)
     public ResponseEntity<Product> getProductByName(@PathVariable String name){
-        return new ResponseEntity<>(this.productServicePort.getProduct(name), HttpStatus.OK);
+        return new ResponseEntity<>(this.productServicePort.getProductByName(name), HttpStatus.OK);
     }
 
    @RequestMapping(value="/products/deleteProduct/{id}", method= RequestMethod.POST)

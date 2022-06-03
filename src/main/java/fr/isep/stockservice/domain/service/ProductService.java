@@ -30,8 +30,8 @@ public class ProductService implements ProductServicePort {
     }
 
     @Override
-    public Product getProduct(String name) {
-        Product product = this.productRepositoryPort.findByProductname(name);
+    public Product getProductByName(String name) {
+        Product product = this.productRepositoryPort.findByName(name);
         return product;
     }
 
