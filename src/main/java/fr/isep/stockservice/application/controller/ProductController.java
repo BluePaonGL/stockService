@@ -26,8 +26,9 @@ public class ProductController {
     private ProductServicePort productServicePort;
     private ModelMapper modelMapper;
     private Product product;
-    @PostMapping()
-    public ResponseEntity<Product> createProduct(@Valid @RequestBody ProductDTO productDTO){
+
+    @RequestMapping(value="/products/addProduct", method= RequestMethod.POST)
+    public ResponseEntity<Product> createProduct(@RequestBody ProductDTO productDTO){
         return ResponseEntity.ok(this.productServicePort.saveProduct(productDTO));
     }
 
@@ -37,9 +38,19 @@ public class ProductController {
         return new ResponseEntity<>(this.productServicePort.getProducts(), HttpStatus.OK);
     }
 
-    @RequestMapping(value="/", method= RequestMethod.GET)
-    public String hello(@RequestParam(value = "name", required = false) String name) {
-        return "Hello " + name;
+    @RequestMapping(value="/products/findProductById/{id}", method= RequestMethod.GET)
+    public ResponseEntity<Product> getProductById(@PathVariable Long id){
+        return new ResponseEntity<>(this.productServicePort.getProductById(id), HttpStatus.OK);
+    }
+
+    @RequestMapping(value="/products/findProductByName/{Name}", method= RequestMethod.GET)
+    public ResponseEntity<Product> getProductByName(@PathVariable String name){
+        return new ResponseEntity<>(this.productServicePort.getProduct(name), HttpStatus.OK);
+    }
+
+   @RequestMapping(value="/products/deleteProduct/{id}", method= RequestMethod.POST)
+    public void deleteProduct(@PathVariable Long id){
+        this.productServicePort.deleteProduct(id);
     }
 
 

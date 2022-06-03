@@ -53,7 +53,7 @@ public class ProductRepositoryAdapter implements ProductRepositoryPort {
     }
 
     @Override
-    public void delete(Long productId) {
+    public void deleteProduct(Long productId) {
         this.productRepository.delete(this.productRepository.findByProductId(productId));
     }
 }
