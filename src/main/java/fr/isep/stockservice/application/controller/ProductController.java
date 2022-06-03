@@ -31,6 +31,20 @@ public class ProductController {
         return ResponseEntity.ok(this.productServicePort.saveProduct(productDTO));
     }
 
+    @PutMapping("/products/editProduct/{id}")
+        public ResponseEntity<Product> editProduct(@RequestBody ProductDTO productDTO, @PathVariable Long id){
+            Product toEdit = this.productServicePort.getProductById(id);
+            toEdit.setAllergenSet(productDTO.getAllergenSet());
+            toEdit.setConsumptionDate(productDTO.getConsumptionDate());
+            toEdit.setDescription(productDTO.getDescription());
+            toEdit.setName(productDTO.getName());
+            toEdit.setPeremptionDate(productDTO.getPeremptionDate());
+            toEdit.setQuantity(productDTO.getQuantity());
+            toEdit.setType(productDTO.getType());
+            ProductDTO editedProductDTO = modelMapper.map(toEdit, ProductDTO.class);
+            return ResponseEntity.ok(this.productServicePort.saveProduct(editedProductDTO));
+    }
+
     // Notre Stock ?
     @RequestMapping(value="/products", method= RequestMethod.GET)
     public ResponseEntity<List<Product>> getAllProduct(){
@@ -47,7 +61,8 @@ public class ProductController {
         return new ResponseEntity<>(this.productServicePort.getProductByName(name), HttpStatus.OK);
     }
 
-   @RequestMapping(value="/products/deleteProduct/{id}", method= RequestMethod.POST)
+
+   @DeleteMapping("/products/deleteProduct/{id}")
     public void deleteProduct(@PathVariable Long id){
         this.productServicePort.deleteProduct(id);
     }

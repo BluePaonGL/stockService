@@ -29,6 +29,13 @@ public class ProductService implements ProductServicePort {
         return this.productRepositoryPort.save(product);
     }
 
+    /*@Override
+        public Product editProduct(ProductDTO productDTO) {
+            Product product = modelMapper.map(productDTO, Product.class);
+            return this.productRepositoryPort.save(product);
+            return this.productRepositoryPort.;
+        }*/
+
     @Override
     public Product getProductByName(String name) {
         Product product = this.productRepositoryPort.findByName(name);
