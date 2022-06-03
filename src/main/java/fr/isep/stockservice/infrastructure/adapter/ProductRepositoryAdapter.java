@@ -7,10 +7,12 @@ import fr.isep.stockservice.infrastructure.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Component
@@ -20,8 +22,8 @@ public class ProductRepositoryAdapter implements ProductRepositoryPort {
     private final ModelMapper modelMapper;
 
     @Override
-    public Product findById(Long userId) {
-        ProductDAO userDaoOptional = this.productRepository.findByProductId(userId);
+    public Product findById(Long productId) {
+        ProductDAO userDaoOptional = this.productRepository.findByProductId(productId);
         try {
             return modelMapper.map(userDaoOptional, Product.class);
         } catch (Exception exception) {
@@ -34,24 +36,24 @@ public class ProductRepositoryAdapter implements ProductRepositoryPort {
         return null;
     }
 
-    /*@Override
+    @Override
     public Product save(Product product) {
         ProductDAO productDao = modelMapper.map(product, ProductDAO.class);
         return modelMapper.map(this.productRepository.save(productDao), Product.class);
-    }*/
-
-    @Override
-    public Product save(Product product) {
-        return product;
     }
+
+
 
     @Override
     public List<Product> findAll() {
-        return null;
+        List<ProductDAO> listDAO = this.productRepository.findAll();
+
+        return listDAO.stream().map(event -> modelMapper.map(event, Product.class)).collect(Collectors.toList());
+
     }
 
     @Override
-    public void delete(Long userId) {
-
+    public void delete(Long productId) {
+        this.productRepository.delete(this.productRepository.findByProductId(productId));
     }
 }

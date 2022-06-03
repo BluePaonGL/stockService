@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.keycloak.admin.client.Keycloak;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,21 +25,25 @@ public class ProductService implements ProductServicePort {
 
     @Override
     public Product saveProduct(ProductDTO productDTO) {
-        return null;
+        Product product = modelMapper.map(productDTO, Product.class);
+        return this.productRepositoryPort.save(product);
     }
 
     @Override
     public Product getProduct(String name) {
-        return null;
+        Product product = this.productRepositoryPort.findByProductname(name);
+        return product;
     }
 
     @Override
-    public Product getProductById(String id_product) {
-        return null;
+    public Product getProductById(Long id_product) {
+        Product product = this.productRepositoryPort.findById(id_product);
+        return product;
     }
 
     @Override
     public List<Product> getProducts() {
-        return null;
+        List<Product> result = this.productRepositoryPort.findAll();
+        return result;
     }
 }

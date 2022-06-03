@@ -8,7 +8,7 @@ import java.util.List;
 public interface ProductServicePort {
     Product saveProduct(ProductDTO productDTO);
     Product getProduct(String name);
-    Product getProductById(String id_product);
+    Product getProductById(Long id_product);
 
     List<Product> getProducts();
 }
