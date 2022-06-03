@@ -10,6 +10,6 @@ public interface ProductRepositoryPort {
     Product save(Product product);
     List<Product> findAll();
 
-    void delete(Long productId);
+    void deleteProduct(Long productId);
 
 }

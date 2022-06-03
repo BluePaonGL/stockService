@@ -46,4 +46,10 @@ public class ProductService implements ProductServicePort {
         List<Product> result = this.productRepositoryPort.findAll();
         return result;
     }
+
+
+    @Override
+    public void deleteProduct(Long id) {
+        this.productRepositoryPort.deleteProduct(id);
+    }
 }

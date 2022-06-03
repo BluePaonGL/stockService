@@ -11,4 +11,6 @@ public interface ProductServicePort {
     Product getProductById(Long id_product);
 
     List<Product> getProducts();
+    
+    void deleteProduct(Long id);
 }
