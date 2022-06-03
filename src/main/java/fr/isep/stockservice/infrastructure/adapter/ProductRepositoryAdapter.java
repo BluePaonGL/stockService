@@ -6,11 +6,9 @@ import fr.isep.stockservice.infrastructure.DAO.ProductDAO;
 import fr.isep.stockservice.infrastructure.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -18,42 +16,46 @@ import java.util.stream.Collectors;
 // Les Adapters s'occupent de tout ce qui est filtrage/pagination
 public class ProductRepositoryAdapter implements ProductRepositoryPort {
     private ProductRepository productRepository;
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     @Override
-    public Product findById(Long userId) {
-        ProductDAO userDaoOptional = this.productRepository.findByProductId(userId);
+    public Product findById(Long productId) {
+        ProductDAO productDaoOptional = this.productRepository.findByProductId(productId);
         try {
-            return modelMapper.map(userDaoOptional, Product.class);
+            return modelMapper.map(productDaoOptional, Product.class);
         } catch (Exception exception) {
             throw exception;
         }
     }
 
     @Override
-    public Product findByProductname(String product_name) {
-        return null;
+    public Product findByName(String name) {
+        ProductDAO productDaoOptional = this.productRepository.findByName(name);
+        try {
+            return modelMapper.map(productDaoOptional, Product.class);
+        } catch (Exception exception) {
+            throw exception;
+        }
     }
-
-    /*@Override
-    public Product save(Product product) {
-        ProductDAO productDao = modelMapper.map(product, ProductDAO.class);
-        return modelMapper.map(this.productRepository.save(productDao), Product.class);
-    }*/
 
     @Override
     public Product save(Product product) {
-        return product;
+        ProductDAO productDao = modelMapper.map(product, ProductDAO.class);
+        return modelMapper.map(this.productRepository.save(productDao), Product.class);
     }
+
+
 
     @Override
     public List<Product> findAll() {
         List<ProductDAO> listDAO = this.productRepository.findAll();
-        return listDAO.stream().map(product -> modelMapper.map(product, Product.class)).collect(Collectors.toList());
+
+        return listDAO.stream().map(event -> modelMapper.map(event, Product.class)).collect(Collectors.toList());
+
     }
 
     @Override
-    public void delete(Long userId) {
-
+    public void deleteProduct(Long productId) {
+        this.productRepository.delete(this.productRepository.findByProductId(productId));
     }
 }

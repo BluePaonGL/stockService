@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface ProductRepositoryPort {
     Product findById(Long id_product);
-    Product findByProductname(String product_name);
+    Product findByName(String name);
     Product save(Product product);
     List<Product> findAll();
 
-    void delete(Long productId);
+    void deleteProduct(Long productId);
 
 }

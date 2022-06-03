@@ -7,8 +7,10 @@ import java.util.List;
 
 public interface ProductServicePort {
     Product saveProduct(ProductDTO productDTO);
-    Product getProduct(String name);
-    Product getProductById(String id_product);
-
+    Product getProductByName(String name);
+    Product getProductById(Long id_product);
+    Product editProduct(ProductDTO productDTO, Long id);
     List<Product> getProducts();
+    
+    void deleteProduct(Long id);
 }

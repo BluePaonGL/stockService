@@ -14,6 +14,7 @@ import java.util.Set;
 // Manipulation des champs de l'objet
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Setter(value = AccessLevel.NONE)
 @Getter
 public class ProductDTO implements Serializable {
@@ -28,6 +29,6 @@ public class ProductDTO implements Serializable {
     //@NotEmpty
     private ProductType type;
     private Date peremptionDate;
-    private Date consumptionData;
+    private Date consumptionDate;
     private String allergenSet;
 }
