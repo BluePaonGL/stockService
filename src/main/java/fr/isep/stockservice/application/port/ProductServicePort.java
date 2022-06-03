@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ProductServicePort {
     Product saveProduct(ProductDTO productDTO);
-    Product getProduct(String name);
+    Product getProductByName(String name);
     Product getProductById(Long id_product);
 
     List<Product> getProducts();

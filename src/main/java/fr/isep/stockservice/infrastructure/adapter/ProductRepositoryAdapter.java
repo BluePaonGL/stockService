@@ -6,12 +6,9 @@ import fr.isep.stockservice.infrastructure.DAO.ProductDAO;
 import fr.isep.stockservice.infrastructure.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -23,17 +20,22 @@ public class ProductRepositoryAdapter implements ProductRepositoryPort {
 
     @Override
     public Product findById(Long productId) {
-        ProductDAO userDaoOptional = this.productRepository.findByProductId(productId);
+        ProductDAO productDaoOptional = this.productRepository.findByProductId(productId);
         try {
-            return modelMapper.map(userDaoOptional, Product.class);
+            return modelMapper.map(productDaoOptional, Product.class);
         } catch (Exception exception) {
             throw exception;
         }
     }
 
     @Override
-    public Product findByProductname(String product_name) {
-        return null;
+    public Product findByName(String name) {
+        ProductDAO productDaoOptional = this.productRepository.findByName(name);
+        try {
+            return modelMapper.map(productDaoOptional, Product.class);
+        } catch (Exception exception) {
+            throw exception;
+        }
     }
 
     @Override

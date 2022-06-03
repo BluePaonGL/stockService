@@ -9,7 +9,7 @@ import java.util.Date;
 
 public interface ProductRepository extends JpaRepository<ProductDAO, Long>, JpaSpecificationExecutor<ProductDAO> {
     ProductDAO findByProductId(Long id);
-
+    ProductDAO findByName(String name);
 
 
 }
