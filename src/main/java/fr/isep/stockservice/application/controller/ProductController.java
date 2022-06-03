@@ -33,16 +33,11 @@ public class ProductController {
 
     @PutMapping("/products/editProduct/{id}")
         public ResponseEntity<Product> editProduct(@RequestBody ProductDTO productDTO, @PathVariable Long id){
-            Product toEdit = this.productServicePort.getProductById(id);
-            toEdit.setAllergenSet(productDTO.getAllergenSet());
-            toEdit.setConsumptionDate(productDTO.getConsumptionDate());
-            toEdit.setDescription(productDTO.getDescription());
-            toEdit.setName(productDTO.getName());
-            toEdit.setPeremptionDate(productDTO.getPeremptionDate());
-            toEdit.setQuantity(productDTO.getQuantity());
-            toEdit.setType(productDTO.getType());
-            ProductDTO editedProductDTO = modelMapper.map(toEdit, ProductDTO.class);
-            return ResponseEntity.ok(this.productServicePort.saveProduct(editedProductDTO));
+            //à supprimer si jamais on peut récupere tout le form
+            //Product toEdit = this.productServicePort.getProductById(id);
+            //ProductDTO editedProductDTO = new ProductDTO(productDTO.getName(),productDTO.getDescription(),productDTO.getQuantity(),productDTO.getType(),productDTO.getPeremptionDate(),productDTO.getConsumptionDate(),productDTO.getAllergenSet());
+            //return ResponseEntity.ok(this.productServicePort.saveProduct(editedProductDTO));
+            return ResponseEntity.ok(this.productServicePort.editProduct(productDTO,id));
     }
 
     // Notre Stock ?

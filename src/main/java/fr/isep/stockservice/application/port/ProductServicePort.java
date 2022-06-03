@@ -9,7 +9,7 @@ public interface ProductServicePort {
     Product saveProduct(ProductDTO productDTO);
     Product getProductByName(String name);
     Product getProductById(Long id_product);
-    //Product editProduct(ProductDTO productDTO);
+    Product editProduct(ProductDTO productDTO, Long id);
     List<Product> getProducts();
     
     void deleteProduct(Long id);
