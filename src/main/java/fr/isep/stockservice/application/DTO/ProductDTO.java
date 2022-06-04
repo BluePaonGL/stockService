@@ -13,6 +13,7 @@ import java.util.Set;
 // Manipulation des champs de l'objet
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Setter(value = AccessLevel.NONE)
 @Getter
 public class ProductDTO {

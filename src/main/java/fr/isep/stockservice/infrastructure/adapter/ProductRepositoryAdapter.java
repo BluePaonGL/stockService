@@ -1,5 +1,6 @@
 package fr.isep.stockservice.infrastructure.adapter;
 
+import fr.isep.stockservice.application.DTO.ProductDTO;
 import fr.isep.stockservice.domain.model.Product;
 import fr.isep.stockservice.domain.port.ProductRepositoryPort;
 import fr.isep.stockservice.infrastructure.DAO.ProductDAO;
@@ -58,4 +59,7 @@ public class ProductRepositoryAdapter implements ProductRepositoryPort {
     public void deleteProduct(Long productId) {
         this.productRepository.delete(this.productRepository.findByProductId(productId));
     }
+
+
+
 }

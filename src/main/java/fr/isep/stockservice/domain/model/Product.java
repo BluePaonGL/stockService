@@ -1,5 +1,6 @@
 package fr.isep.stockservice.domain.model;
 
+import fr.isep.stockservice.application.DTO.ProductDTO;
 import lombok.Data;
 import java.util.Date;
 
@@ -29,4 +30,5 @@ public class Product {
         return idLists += "," + String.valueOf(id);
     }
 */
+
 }
