@@ -5,6 +5,9 @@ import fr.isep.stockservice.infrastructure.DAO.ProductDAO;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 
+import java.util.Calendar;
+import java.util.Date;
+
 // A utiliser pour les filtre - Aide
 @NoArgsConstructor
 public class StockRepositorySpecification {
@@ -24,6 +27,22 @@ public class StockRepositorySpecification {
         return (root, query, criteriaBuilder) -> {
             if(type != null) {
                 return criteriaBuilder.equal(root.get("type"), type);
+            } else {
+                return criteriaBuilder.conjunction();
+            }
+
+        };
+    }
+
+    public static Specification<ProductDAO> peremptionDateInTwoWeeks(Date peremptionDate) {
+        int noOfDays = 14; //i.e two weeks
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(peremptionDate);
+        calendar.add(Calendar.DAY_OF_YEAR, noOfDays);
+        Date dateInTwoWeeks = calendar.getTime();
+        return (root, query, criteriaBuilder) -> {
+            if(peremptionDate != null) {
+                return criteriaBuilder.between(root.get("peremptionDate"),peremptionDate,dateInTwoWeeks);
             } else {
                 return criteriaBuilder.conjunction();
             }

@@ -5,8 +5,10 @@ import fr.isep.stockservice.application.port.ProductServicePort;
 import fr.isep.stockservice.domain.criteria.ProductCriteria;
 import fr.isep.stockservice.domain.model.Product;
 import fr.isep.stockservice.domain.model.ProductType;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.bytebuddy.implementation.bind.annotation.Default;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,7 +17,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -74,6 +81,22 @@ public class ProductController {
     }
 
 
+    @GetMapping("/products/peremptionDate")
+    public ResponseEntity<Page<Product>> pageProductPeremptionDate(
+            @RequestParam(defaultValue = "0") Integer pageNumber,
+            @RequestParam(defaultValue = "20") Integer pageSize
+            ) {
+
+        //final String date = new Date().toString();
+        Date peremptionDate = new Date();
+        ProductCriteria productCriteria = ProductCriteria.builder()
+                .pageNumber(pageNumber)
+                .pageSize(pageSize)
+                .peremptionDate(peremptionDate)
+                .build();
+
+        return new ResponseEntity<>(this.productServicePort.pageProductPeremptionDate(productCriteria), HttpStatus.OK);
+    }
     // Notre Stock ?
     @RequestMapping(value="/products/all", method= RequestMethod.GET)
     public ResponseEntity<List<Product>> getAllProduct(){

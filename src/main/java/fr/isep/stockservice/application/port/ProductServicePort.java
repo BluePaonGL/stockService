@@ -15,5 +15,6 @@ public interface ProductServicePort {
     List<Product> getProducts();
     Page<Product> pageProductName(ProductCriteria productCriteria);
     Page<Product> pageProductType(ProductCriteria productCriteria);
+    Page<Product> pageProductPeremptionDate(ProductCriteria productCriteria);
     void deleteProduct(Long id);
 }

@@ -62,7 +62,10 @@ public class ProductService implements ProductServicePort {
         return this.productRepositoryPort.pageProductType(productCriteria);
     }
 
-
+    @Override
+    public Page<Product> pageProductPeremptionDate(ProductCriteria productCriteria) {
+        return this.productRepositoryPort.pageProductPeremptionDate(productCriteria);
+    }
 
 
     @Override

@@ -1,6 +1,5 @@
 package fr.isep.stockservice.infrastructure.adapter;
 
-import fr.isep.stockservice.application.DTO.ProductDTO;
 import fr.isep.stockservice.domain.criteria.ProductCriteria;
 import fr.isep.stockservice.domain.model.Product;
 import fr.isep.stockservice.domain.port.ProductRepositoryPort;
@@ -17,8 +16,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static fr.isep.stockservice.infrastructure.helper.StockRepositorySpecification.nameEquals;
-import static fr.isep.stockservice.infrastructure.helper.StockRepositorySpecification.typeEquals;
+import static fr.isep.stockservice.infrastructure.helper.StockRepositorySpecification.*;
 import static org.springframework.data.jpa.domain.Specification.where;
 
 @AllArgsConstructor
@@ -54,15 +52,23 @@ public class ProductRepositoryAdapter implements ProductRepositoryPort {
         return modelMapper.map(this.productRepository.save(productDao), Product.class);
     }
 
-
-
     @Override
     public List<Product> findAll() {
         List<ProductDAO> listDAO = this.productRepository.findAll();
 
-        return listDAO.stream().map(event -> modelMapper.map(event, Product.class)).collect(Collectors.toList());
+        return listDAO.stream().map(product -> modelMapper.map(product, Product.class)).collect(Collectors.toList());
 
     }
+
+    @Override
+    public Page<Product> pageProductPeremptionDate(ProductCriteria productCriteria) {
+        Pageable paging = PageRequest.of(productCriteria.getPageNumber(), productCriteria.getPageSize());
+        Specification<ProductDAO> specification = where(peremptionDateInTwoWeeks(productCriteria.getPeremptionDate()));
+        Page<ProductDAO> productDaoPage = this.productRepository.findAll(specification, paging);
+        return productDaoPage.map(productDAO -> modelMapper.map(productDAO, Product.class));
+
+    }
+
 
     @Override
     public void deleteProduct(Long productId) {
