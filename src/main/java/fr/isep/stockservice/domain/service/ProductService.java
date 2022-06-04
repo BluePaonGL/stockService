@@ -2,14 +2,13 @@ package fr.isep.stockservice.domain.service;
 
 import fr.isep.stockservice.application.DTO.ProductDTO;
 import fr.isep.stockservice.application.port.ProductServicePort;
+import fr.isep.stockservice.domain.criteria.ProductCriteria;
 import fr.isep.stockservice.domain.model.Product;
 import fr.isep.stockservice.domain.port.ProductRepositoryPort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.keycloak.admin.client.Keycloak;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.parameters.P;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -52,6 +51,18 @@ public class ProductService implements ProductServicePort {
         List<Product> result = this.productRepositoryPort.findAll();
         return result;
     }
+
+    @Override
+    public Page<Product> pageProductName(ProductCriteria productCriteria) {
+        return this.productRepositoryPort.pageProductName(productCriteria);
+    }
+
+    @Override
+    public Page<Product> pageProductType(ProductCriteria productCriteria) {
+        return this.productRepositoryPort.pageProductType(productCriteria);
+    }
+
+
 
 
     @Override

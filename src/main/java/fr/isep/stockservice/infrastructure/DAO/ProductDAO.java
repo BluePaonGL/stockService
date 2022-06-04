@@ -35,6 +35,8 @@ public class ProductDAO {
     private Date consumptionDate;
     private String allergenSet;
 
+
+
     //@OneToMany(targetEntity = fr.isep.stockservice.infrastructure.DAO.ShoppingListDAO.class)
     //@ToString.Exclude
     //private Set<Integer> idLists;

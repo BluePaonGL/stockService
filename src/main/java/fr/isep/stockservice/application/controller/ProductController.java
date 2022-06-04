@@ -2,11 +2,14 @@ package fr.isep.stockservice.application.controller;
 
 import fr.isep.stockservice.application.DTO.ProductDTO;
 import fr.isep.stockservice.application.port.ProductServicePort;
+import fr.isep.stockservice.domain.criteria.ProductCriteria;
 import fr.isep.stockservice.domain.model.Product;
+import fr.isep.stockservice.domain.model.ProductType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -40,9 +43,39 @@ public class ProductController {
         return ResponseEntity.ok(this.productServicePort.editProduct(productDTO,id));
     }
 
+    @GetMapping("/products")
+    public ResponseEntity<Page<Product>> pageProductName(
+            @RequestParam(defaultValue = "0") Integer pageNumber,
+            @RequestParam(defaultValue = "20") Integer pageSize,
+            @RequestParam(required = false) String name
+    ) {
+        ProductCriteria productCriteria = ProductCriteria.builder()
+                .pageNumber(pageNumber)
+                .pageSize(pageSize)
+                .name(name)
+                .build();
+
+        return new ResponseEntity<>(this.productServicePort.pageProductName(productCriteria), HttpStatus.OK);
+    }
+
+    @GetMapping("/products/type")
+    public ResponseEntity<Page<Product>> pageProductType(
+            @RequestParam(defaultValue = "0") Integer pageNumber,
+            @RequestParam(defaultValue = "20") Integer pageSize,
+            @RequestParam(required = false) ProductType type
+    ) {
+        ProductCriteria productCriteria = ProductCriteria.builder()
+                .pageNumber(pageNumber)
+                .pageSize(pageSize)
+                .type(type)
+                .build();
+
+        return new ResponseEntity<>(this.productServicePort.pageProductType(productCriteria), HttpStatus.OK);
+    }
+
 
     // Notre Stock ?
-    @RequestMapping(value="/products", method= RequestMethod.GET)
+    @RequestMapping(value="/products/all", method= RequestMethod.GET)
     public ResponseEntity<List<Product>> getAllProduct(){
         return new ResponseEntity<>(this.productServicePort.getProducts(), HttpStatus.OK);
     }
