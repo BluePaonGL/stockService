@@ -1,5 +1,6 @@
 package fr.isep.stockservice.application.DTO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import fr.isep.stockservice.domain.model.ProductType;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -31,5 +32,6 @@ public class ProductDTO implements Serializable {
     private Date peremptionDate;
     private Date consumptionDate;
     private String allergenSet;
-    private byte[] image;
+    @JsonIgnore
+    private String image;
 }

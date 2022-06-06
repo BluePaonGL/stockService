@@ -34,9 +34,9 @@ public class ProductDAO {
     @Temporal(TemporalType.DATE)
     private Date consumptionDate;
     private String allergenSet;
-    @Lob
-    @Column(name = "image", columnDefinition="BYTEA")
-    private byte[] image;
+    //@Lob
+    //@Column(name = "image", columnDefinition="BYTEA")
+    private String image;
 
     //@OneToMany(targetEntity = fr.isep.stockservice.infrastructure.DAO.ShoppingListDAO.class)
     //@ToString.Exclude

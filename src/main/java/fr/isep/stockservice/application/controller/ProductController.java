@@ -29,10 +29,15 @@ public class ProductController {
     private ModelMapper modelMapper;
     private Product product;
 
-    @RequestMapping(value="/products/addProduct", method= RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Product> createProduct(@RequestBody ProductDTO productDTO,  @RequestParam("image") MultipartFile image) throws IOException {
+    /*@RequestMapping(value="/products/addProduct", method= RequestMethod.POST)
+    public ResponseEntity<Product> createProduct(@RequestBody ProductDTO productDTO,  @RequestPart("image") MultipartFile image) throws IOException {
         return ResponseEntity.ok(this.productServicePort.saveProduct(productDTO, image));
     }
+
+    @RequestMapping(value="/products/addImage", method= RequestMethod.POST)
+    public ResponseEntity<Product> saveImage(@RequestPart("image") MultipartFile image, @RequestParam Long id) throws IOException {
+        return ResponseEntity.ok(this.productServicePort.saveImage(image, id));
+    }*/
 
     @PutMapping("/products/editProduct/{id}")
         public ResponseEntity<Product> editProduct(@RequestBody ProductDTO productDTO, @PathVariable Long id){

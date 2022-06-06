@@ -14,6 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 // Gestion de la logique métier
@@ -28,7 +31,18 @@ public class ProductService implements ProductServicePort {
     @Override
     public Product saveProduct(ProductDTO productDTO, MultipartFile image) throws IOException {
         Product product = modelMapper.map(productDTO, Product.class);
-        product.setImage(image.getBytes());
+        //product.setImage(image.getBytes());
+        return this.productRepositoryPort.save(product);
+    }
+
+    @Override
+    public Product saveImage(MultipartFile image, Long id) throws IOException {
+        Product product = this.productRepositoryPort.findById(id);
+        String rootDir = System.getProperty("user.dir")+"/src/main/resources/static";
+        Path path = Paths.get(rootDir, image.getOriginalFilename());
+        String filename = image.getOriginalFilename();
+        Files.write(path, image.getBytes());
+        product.setImage(filename);
         return this.productRepositoryPort.save(product);
     }
 

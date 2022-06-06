@@ -14,13 +14,17 @@ public class Product {
     private Date peremptionDate;
     private Date consumptionDate;
     private String allergenSet;
-    private byte[] image;
+    private String image;
 
     public String addAllergen(String allergen) {
         if (allergenSet.isEmpty()) {
             return allergenSet = allergen;
         }
         return allergenSet += "," + allergen;
+    }
+
+    public void setImage(String filename) {
+        this.image = filename;
     }
 /*
     public String addShoppingListId(Long id) {

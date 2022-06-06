@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface ProductServicePort {
     Product saveProduct(ProductDTO productDTO, MultipartFile image) throws IOException;
+    Product saveImage(MultipartFile image, Long id) throws IOException;
     Product getProductByName(String name);
     Product getProductById(Long id_product);
     Product editProduct(ProductDTO productDTO, Long id);
