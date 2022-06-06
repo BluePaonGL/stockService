@@ -10,15 +10,13 @@ import java.io.IOException;
 import java.util.List;
 
 public interface ProductServicePort {
-    Product saveProduct(ProductDTO productDTO);
     Product getProductByName(String name);
     Product getProductById(Long id_product);
-    Product editProduct(ProductDTO productDTO, Long id);
     List<Product> getProducts();
     Page<Product> pageProductName(ProductCriteria productCriteria);
     Page<Product> pageProductType(ProductCriteria productCriteria);
     Page<Product> pageProductPeremptionDate(ProductCriteria productCriteria,int noOfWeek);
     void deleteProduct(Long id);
-    Product saveProductWithImage(ProductDTO productDTO, MultipartFile image) throws IOException;
-    Product editProductWithImage(ProductDTO productDTO, Long id, MultipartFile image) throws IOException;
+    Product saveProduct(ProductDTO productDTO, MultipartFile image) throws IOException;
+    Product editProduct(ProductDTO productDTO, Long id, MultipartFile image) throws IOException;
 }

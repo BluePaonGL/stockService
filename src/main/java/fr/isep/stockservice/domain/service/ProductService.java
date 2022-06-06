@@ -26,30 +26,21 @@ public class ProductService implements ProductServicePort {
     private final ModelMapper modelMapper;
 
     @Override
-    public Product saveProduct(ProductDTO productDTO) {
+    public Product saveProduct(ProductDTO productDTO, MultipartFile image) throws IOException {
         Product product = modelMapper.map(productDTO, Product.class);
-        return this.productRepositoryPort.save(product);
-    }
-
-    @Override
-    public Product saveProductWithImage(ProductDTO productDTO, MultipartFile image) throws IOException {
-        Product product = modelMapper.map(productDTO, Product.class);
-        product.setImage(image.getBytes());
-        return this.productRepositoryPort.save(product);
-    }
-
-    @Override
-        public Product editProduct(ProductDTO productDTO,Long id) {
-            Product product = modelMapper.map(productDTO, Product.class);
-            product.setProductId(id);
-            return this.productRepositoryPort.save(product);
+        if (image != null) {
+            product.setImage(image.getBytes());
         }
+        return this.productRepositoryPort.save(product);
+    }
 
     @Override
-    public Product editProductWithImage(ProductDTO productDTO, Long id, MultipartFile image) throws IOException {
+    public Product editProduct(ProductDTO productDTO, Long id, MultipartFile image) throws IOException {
         Product product = modelMapper.map(productDTO, Product.class);
         product.setProductId(id);
-        product.setImage(image.getBytes());
+        if (image != null) {
+            product.setImage(image.getBytes());
+        }
         return this.productRepositoryPort.save(product);
     }
 
