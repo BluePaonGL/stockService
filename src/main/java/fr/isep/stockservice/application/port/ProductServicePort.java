@@ -19,5 +19,6 @@ public interface ProductServicePort {
     Page<Product> pageProductType(ProductCriteria productCriteria);
     Page<Product> pageProductPeremptionDate(ProductCriteria productCriteria,int noOfWeek);
     void deleteProduct(Long id);
-  
+    Product saveProductWithImage(ProductDTO productDTO, MultipartFile image) throws IOException;
+    Product editProductWithImage(ProductDTO productDTO, Long id, MultipartFile image) throws IOException;
 }

@@ -30,4 +30,5 @@ public class ProductDTO {
     private Date peremptionDate;
     private Date consumptionDate;
     private String allergenSet;
+    private byte[] image;
 }

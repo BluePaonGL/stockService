@@ -34,6 +34,8 @@ public class ProductDAO {
     @Temporal(TemporalType.DATE)
     private Date consumptionDate;
     private String allergenSet;
+    @Lob
+    private byte[] image;
 
 
 
