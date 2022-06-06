@@ -11,7 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -31,6 +33,11 @@ public class ProductController {
         return ResponseEntity.ok(this.productServicePort.saveProduct(productDTO));
     }
 
+    @RequestMapping(value="/products/addImage", method= RequestMethod.POST, consumes = {"multipart/form-data"})
+    public ResponseEntity<Product> addImage(@RequestPart("product") ProductDTO productDTO, @RequestPart("file") MultipartFile image) throws IOException {
+        return ResponseEntity.ok(this.productServicePort.saveProductWithImage(productDTO, image));
+    }
+
     @PutMapping("/products/editProduct/{id}")
         public ResponseEntity<Product> editProduct(@RequestBody ProductDTO productDTO, @PathVariable Long id){
             //à supprimer si jamais on peut récupere tout le form
@@ -38,6 +45,11 @@ public class ProductController {
             //ProductDTO editedProductDTO = new ProductDTO(productDTO.getName(),productDTO.getDescription(),productDTO.getQuantity(),productDTO.getType(),productDTO.getPeremptionDate(),productDTO.getConsumptionDate(),productDTO.getAllergenSet());
             //return ResponseEntity.ok(this.productServicePort.saveProduct(editedProductDTO));
             return ResponseEntity.ok(this.productServicePort.editProduct(productDTO,id));
+    }
+
+    @RequestMapping(value="/products/editImage/{id}", method= RequestMethod.PUT, consumes = {"multipart/form-data"})
+    public ResponseEntity<Product> editImage(@RequestPart("product") ProductDTO productDTO, @RequestPart("id") Long id, @RequestPart("file") MultipartFile image) throws IOException {
+        return ResponseEntity.ok(this.productServicePort.editProductWithImage(productDTO, id, image));
     }
 
     // Notre Stock ?

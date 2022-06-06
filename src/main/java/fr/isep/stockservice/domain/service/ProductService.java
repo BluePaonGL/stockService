@@ -11,7 +11,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
+import java.io.IOException;
 import java.util.List;
 
 // Gestion de la logique métier
@@ -30,6 +33,13 @@ public class ProductService implements ProductServicePort {
     }
 
     @Override
+    public Product saveProductWithImage(ProductDTO productDTO, MultipartFile image) throws IOException {
+        Product product = modelMapper.map(productDTO, Product.class);
+        product.setImage(image.getBytes());
+        return this.productRepositoryPort.save(product);
+    }
+
+    @Override
         public Product editProduct(ProductDTO productDTO,Long id) {
             Product product = modelMapper.map(productDTO, Product.class);
             product.setProductId(id);
@@ -37,18 +47,29 @@ public class ProductService implements ProductServicePort {
         }
 
     @Override
+    public Product editProductWithImage(ProductDTO productDTO, Long id, MultipartFile image) throws IOException {
+        Product product = modelMapper.map(productDTO, Product.class);
+        product.setProductId(id);
+        product.setImage(image.getBytes());
+        return this.productRepositoryPort.save(product);
+    }
+
+    @Override
+    @Transactional
     public Product getProductByName(String name) {
         Product product = this.productRepositoryPort.findByName(name);
         return product;
     }
 
     @Override
+    @Transactional
     public Product getProductById(Long id_product) {
         Product product = this.productRepositoryPort.findById(id_product);
         return product;
     }
 
     @Override
+    @Transactional
     public List<Product> getProducts() {
         List<Product> result = this.productRepositoryPort.findAll();
         return result;
