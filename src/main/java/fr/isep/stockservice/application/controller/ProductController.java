@@ -38,8 +38,8 @@ public class ProductController {
     private ModelMapper modelMapper;
     private Product product;
 
-    @RequestMapping(value = "/products/addImage", method = RequestMethod.POST, consumes = {"multipart/form-data"})
-    public ResponseEntity<Product> addImage(@RequestPart("product") ProductDTO productDTO, @RequestPart(value = "file", required = false) MultipartFile image) throws IOException {
+    @RequestMapping(value = "/products/addProduct", method = RequestMethod.POST, consumes = {"multipart/form-data"})
+    public ResponseEntity<Product> addProduct(@RequestPart("product") ProductDTO productDTO, @RequestPart(value = "file", required = false) MultipartFile image) throws IOException {
         return ResponseEntity.ok(this.productServicePort.saveProduct(productDTO, image));
     }
 
@@ -92,8 +92,8 @@ public class ProductController {
         return new ResponseEntity<>(this.productServicePort.pageProductPeremptionDate(productCriteria, noOfWeek), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/products/editImage/{id}", method = RequestMethod.PUT, consumes = {"multipart/form-data"})
-    public ResponseEntity<Product> editImage(@RequestPart("product") ProductDTO productDTO, @PathVariable Long id, @RequestPart(value = "file", required = false) MultipartFile image) throws IOException {
+    @RequestMapping(value = "/products/editProduct/{id}", method = RequestMethod.PUT, consumes = {"multipart/form-data"})
+    public ResponseEntity<Product> editProduct(@RequestPart("product") ProductDTO productDTO, @PathVariable Long id, @RequestPart(value = "file", required = false) MultipartFile image) throws IOException {
         return ResponseEntity.ok(this.productServicePort.editProduct(productDTO, id, image));
     }
 
