@@ -34,8 +34,8 @@ public class StockRepositorySpecification {
         };
     }
 
-    public static Specification<ProductDAO> peremptionDateInTwoWeeks(Date peremptionDate) {
-        int noOfDays = 14; //i.e two weeks
+    public static Specification<ProductDAO> peremptionDateInTwoWeeks(Date peremptionDate,int noOfWeek) {
+        int noOfDays = 7*noOfWeek;
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(peremptionDate);
         calendar.add(Calendar.DAY_OF_YEAR, noOfDays);

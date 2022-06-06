@@ -37,6 +37,7 @@ public class ProductDAO {
 
 
 
+
     //@OneToMany(targetEntity = fr.isep.stockservice.infrastructure.DAO.ShoppingListDAO.class)
     //@ToString.Exclude
     //private Set<Integer> idLists;

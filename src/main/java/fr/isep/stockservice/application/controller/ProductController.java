@@ -16,7 +16,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -84,7 +86,8 @@ public class ProductController {
     @GetMapping("/products/peremptionDate")
     public ResponseEntity<Page<Product>> pageProductPeremptionDate(
             @RequestParam(defaultValue = "0") Integer pageNumber,
-            @RequestParam(defaultValue = "20") Integer pageSize
+            @RequestParam(defaultValue = "20") Integer pageSize,
+            @RequestParam(defaultValue = "2") Integer noOfWeek
             ) {
 
         //final String date = new Date().toString();
@@ -95,8 +98,9 @@ public class ProductController {
                 .peremptionDate(peremptionDate)
                 .build();
 
-        return new ResponseEntity<>(this.productServicePort.pageProductPeremptionDate(productCriteria), HttpStatus.OK);
+        return new ResponseEntity<>(this.productServicePort.pageProductPeremptionDate(productCriteria,noOfWeek), HttpStatus.OK);
     }
+
     // Notre Stock ?
     @RequestMapping(value="/products/all", method= RequestMethod.GET)
     public ResponseEntity<List<Product>> getAllProduct(){
@@ -118,7 +122,6 @@ public class ProductController {
     public void deleteProduct(@PathVariable Long id){
         this.productServicePort.deleteProduct(id);
     }
-
 
 
 }

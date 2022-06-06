@@ -4,7 +4,9 @@ import fr.isep.stockservice.application.DTO.ProductDTO;
 import fr.isep.stockservice.domain.criteria.ProductCriteria;
 import fr.isep.stockservice.domain.model.Product;
 import org.springframework.data.domain.Page;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface ProductServicePort {
@@ -15,6 +17,7 @@ public interface ProductServicePort {
     List<Product> getProducts();
     Page<Product> pageProductName(ProductCriteria productCriteria);
     Page<Product> pageProductType(ProductCriteria productCriteria);
-    Page<Product> pageProductPeremptionDate(ProductCriteria productCriteria);
+    Page<Product> pageProductPeremptionDate(ProductCriteria productCriteria,int noOfWeek);
     void deleteProduct(Long id);
+  
 }

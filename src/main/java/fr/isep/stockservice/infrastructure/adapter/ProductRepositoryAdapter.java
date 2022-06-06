@@ -61,9 +61,9 @@ public class ProductRepositoryAdapter implements ProductRepositoryPort {
     }
 
     @Override
-    public Page<Product> pageProductPeremptionDate(ProductCriteria productCriteria) {
+    public Page<Product> pageProductPeremptionDate(ProductCriteria productCriteria,int noOfWeek) {
         Pageable paging = PageRequest.of(productCriteria.getPageNumber(), productCriteria.getPageSize());
-        Specification<ProductDAO> specification = where(peremptionDateInTwoWeeks(productCriteria.getPeremptionDate()));
+        Specification<ProductDAO> specification = where(peremptionDateInTwoWeeks(productCriteria.getPeremptionDate(), noOfWeek));
         Page<ProductDAO> productDaoPage = this.productRepository.findAll(specification, paging);
         return productDaoPage.map(productDAO -> modelMapper.map(productDAO, Product.class));
 

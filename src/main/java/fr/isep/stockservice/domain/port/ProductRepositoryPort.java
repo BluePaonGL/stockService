@@ -13,7 +13,7 @@ public interface ProductRepositoryPort {
     Product findByName(String name);
     Product save(Product product);
     List<Product> findAll();
-    Page<Product> pageProductPeremptionDate(ProductCriteria productCriteria);
+    Page<Product> pageProductPeremptionDate(ProductCriteria productCriteria,int noOfWeek);
     Page<Product> pageProductName(ProductCriteria productCriteria);
     Page<Product> pageProductType(ProductCriteria productCriteria);
     void deleteProduct(Long productId);

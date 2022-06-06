@@ -63,8 +63,8 @@ public class ProductService implements ProductServicePort {
     }
 
     @Override
-    public Page<Product> pageProductPeremptionDate(ProductCriteria productCriteria) {
-        return this.productRepositoryPort.pageProductPeremptionDate(productCriteria);
+    public Page<Product> pageProductPeremptionDate(ProductCriteria productCriteria,int noOfWeek) {
+        return this.productRepositoryPort.pageProductPeremptionDate(productCriteria,noOfWeek);
     }
 
 
@@ -72,5 +72,7 @@ public class ProductService implements ProductServicePort {
     public void deleteProduct(Long id) {
         this.productRepositoryPort.deleteProduct(id);
     }
+    
+    
 
 }
