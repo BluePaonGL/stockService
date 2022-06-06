@@ -11,7 +11,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 // Gestion de la logique métier
@@ -20,12 +22,13 @@ import java.util.List;
 @Slf4j
 public class ProductService implements ProductServicePort {
 
-    private final ProductRepositoryPort productRepositoryPort;
-    private final ModelMapper modelMapper;
+    private ProductRepositoryPort productRepositoryPort;
+    private ModelMapper modelMapper;
 
     @Override
-    public Product saveProduct(ProductDTO productDTO) {
+    public Product saveProduct(ProductDTO productDTO, MultipartFile image) throws IOException {
         Product product = modelMapper.map(productDTO, Product.class);
+        product.setImage(image.getBytes());
         return this.productRepositoryPort.save(product);
     }
 

@@ -8,10 +8,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -26,9 +29,9 @@ public class ProductController {
     private ModelMapper modelMapper;
     private Product product;
 
-    @RequestMapping(value="/products/addProduct", method= RequestMethod.POST)
-    public ResponseEntity<Product> createProduct(@RequestBody ProductDTO productDTO){
-        return ResponseEntity.ok(this.productServicePort.saveProduct(productDTO));
+    @RequestMapping(value="/products/addProduct", method= RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Product> createProduct(@RequestBody ProductDTO productDTO,  @RequestParam("image") MultipartFile image) throws IOException {
+        return ResponseEntity.ok(this.productServicePort.saveProduct(productDTO, image));
     }
 
     @PutMapping("/products/editProduct/{id}")

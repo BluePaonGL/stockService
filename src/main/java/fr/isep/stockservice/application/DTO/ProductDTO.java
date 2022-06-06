@@ -31,4 +31,5 @@ public class ProductDTO implements Serializable {
     private Date peremptionDate;
     private Date consumptionDate;
     private String allergenSet;
+    private byte[] image;
 }

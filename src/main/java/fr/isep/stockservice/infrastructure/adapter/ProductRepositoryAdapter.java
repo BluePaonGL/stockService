@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 // Les Adapters s'occupent de tout ce qui est filtrage/pagination
 public class ProductRepositoryAdapter implements ProductRepositoryPort {
     private ProductRepository productRepository;
-    private final ModelMapper modelMapper;
+    private ModelMapper modelMapper;
 
     @Override
     public Product findById(Long productId) {
