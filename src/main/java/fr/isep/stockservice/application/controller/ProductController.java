@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -33,26 +34,21 @@ public class ProductController {
         return ResponseEntity.ok(this.productServicePort.saveProduct(productDTO));
     }
 
-    @RequestMapping(value="/products/addImage", method= RequestMethod.POST, consumes = {"multipart/form-data"})
+    @PostMapping(value="/products/addImage", consumes = {"multipart/form-data"})
     public ResponseEntity<Product> addImage(@RequestPart("product") ProductDTO productDTO, @RequestPart("file") MultipartFile image) throws IOException {
         return ResponseEntity.ok(this.productServicePort.saveProductWithImage(productDTO, image));
     }
 
     @PutMapping("/products/editProduct/{id}")
         public ResponseEntity<Product> editProduct(@RequestBody ProductDTO productDTO, @PathVariable Long id){
-            //à supprimer si jamais on peut récupere tout le form
-            //Product toEdit = this.productServicePort.getProductById(id);
-            //ProductDTO editedProductDTO = new ProductDTO(productDTO.getName(),productDTO.getDescription(),productDTO.getQuantity(),productDTO.getType(),productDTO.getPeremptionDate(),productDTO.getConsumptionDate(),productDTO.getAllergenSet());
-            //return ResponseEntity.ok(this.productServicePort.saveProduct(editedProductDTO));
             return ResponseEntity.ok(this.productServicePort.editProduct(productDTO,id));
     }
 
-    @RequestMapping(value="/products/editImage/{id}", method= RequestMethod.PUT, consumes = {"multipart/form-data"})
+    @RequestMapping(value="/products/editImage/{id}", method= RequestMethod.PUT, consumes = {"multipart/form-data", "application/octet-stream"})
     public ResponseEntity<Product> editImage(@RequestPart("product") ProductDTO productDTO, @RequestPart("id") Long id, @RequestPart("file") MultipartFile image) throws IOException {
         return ResponseEntity.ok(this.productServicePort.editProductWithImage(productDTO, id, image));
     }
 
-    // Notre Stock ?
     @RequestMapping(value="/products/all", method= RequestMethod.GET)
     public ResponseEntity<List<Product>> getAllProduct(){
         return new ResponseEntity<>(this.productServicePort.getProducts(), HttpStatus.OK);
@@ -68,12 +64,9 @@ public class ProductController {
         return new ResponseEntity<>(this.productServicePort.getProductByName(name), HttpStatus.OK);
     }
 
-
    @DeleteMapping("/products/deleteProduct/{id}")
     public void deleteProduct(@PathVariable Long id){
         this.productServicePort.deleteProduct(id);
     }
-
-
 
 }
