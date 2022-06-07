@@ -82,6 +82,7 @@ public class ProductService implements ProductServicePort {
 
 
     @Override
+    @Transactional
     public void deleteProduct(Long id) {
         this.productRepositoryPort.deleteProduct(id);
     }

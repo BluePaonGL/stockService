@@ -13,6 +13,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -37,11 +38,6 @@ public class ProductController {
     private ProductServicePort productServicePort;
     private ModelMapper modelMapper;
     private Product product;
-
-    @RequestMapping(value = "/products/addProduct", method = RequestMethod.POST, consumes = {"multipart/form-data"})
-    public ResponseEntity<Product> addProduct(@RequestPart("product") ProductDTO productDTO, @RequestPart(value = "file", required = false) MultipartFile image) throws IOException {
-        return ResponseEntity.ok(this.productServicePort.saveProduct(productDTO, image));
-    }
 
     @GetMapping("/products")
     public ResponseEntity<Page<Product>> pageProductName(
@@ -92,14 +88,28 @@ public class ProductController {
         return new ResponseEntity<>(this.productServicePort.pageProductPeremptionDate(productCriteria, noOfWeek), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/products/editProduct/{id}", method = RequestMethod.PUT, consumes = {"multipart/form-data"})
-    public ResponseEntity<Product> editProduct(@RequestPart("product") ProductDTO productDTO, @PathVariable Long id, @RequestPart(value = "file", required = false) MultipartFile image) throws IOException {
-        return ResponseEntity.ok(this.productServicePort.editProduct(productDTO, id, image));
+    @RequestMapping(value="/products/addProduct", method= RequestMethod.POST)
+    public ResponseEntity<Product> addProduct(@RequestBody ProductDTO productDTO){
+        return ResponseEntity.ok(this.productServicePort.saveProduct(productDTO));
     }
 
-    // Notre Stock ?
-    @RequestMapping(value = "/products/all", method = RequestMethod.GET)
-    public ResponseEntity<List<Product>> getAllProduct() {
+    @PostMapping(value="/products/addImage", consumes = {"multipart/form-data"})
+    public ResponseEntity<Product> addImage(@RequestPart("product") ProductDTO productDTO, @RequestPart("file") MultipartFile image) throws IOException {
+        return ResponseEntity.ok(this.productServicePort.saveProductWithImage(productDTO, image));
+    }
+
+    @PutMapping("/products/editProduct/{id}")
+        public ResponseEntity<Product> editProduct(@RequestBody ProductDTO productDTO, @PathVariable Long id){
+            return ResponseEntity.ok(this.productServicePort.editProduct(productDTO,id));
+    }
+
+    @RequestMapping(value="/products/editImage/{id}", method= RequestMethod.PUT, consumes = {"multipart/form-data", "application/octet-stream"})
+    public ResponseEntity<Product> editImage(@RequestPart("product") ProductDTO productDTO, @RequestPart("id") Long id, @RequestPart("file") MultipartFile image) throws IOException {
+        return ResponseEntity.ok(this.productServicePort.editProductWithImage(productDTO, id, image));
+    }
+
+    @RequestMapping(value="/products/all", method= RequestMethod.GET)
+    public ResponseEntity<List<Product>> getAllProduct(){
         return new ResponseEntity<>(this.productServicePort.getProducts(), HttpStatus.OK);
     }
 
