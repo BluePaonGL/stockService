@@ -29,7 +29,7 @@ public class ProductController {
     private Product product;
 
     @RequestMapping(value="/products/addProduct", method= RequestMethod.POST)
-    public ResponseEntity<Product> createProduct(@RequestBody ProductDTO productDTO){
+    public ResponseEntity<Product> addProduct(@RequestBody ProductDTO productDTO){
         return ResponseEntity.ok(this.productServicePort.saveProduct(productDTO));
     }
 
@@ -53,7 +53,7 @@ public class ProductController {
     }
 
     // Notre Stock ?
-    @RequestMapping(value="/products", method= RequestMethod.GET)
+    @RequestMapping(value="/products/all", method= RequestMethod.GET)
     public ResponseEntity<List<Product>> getAllProduct(){
         return new ResponseEntity<>(this.productServicePort.getProducts(), HttpStatus.OK);
     }
