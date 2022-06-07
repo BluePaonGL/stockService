@@ -26,7 +26,13 @@ public class ProductService implements ProductServicePort {
     private final ModelMapper modelMapper;
 
     @Override
-    public Product saveProduct(ProductDTO productDTO, MultipartFile image) throws IOException {
+    public Product saveProduct(ProductDTO productDTO) {
+        Product product = modelMapper.map(productDTO, Product.class);
+        return this.productRepositoryPort.save(product);
+    }
+
+    @Override
+    public Product saveProductWithImage(ProductDTO productDTO, MultipartFile image) throws IOException {
         Product product = modelMapper.map(productDTO, Product.class);
         if (image != null) {
             product.setImage(image.getBytes());
@@ -35,7 +41,14 @@ public class ProductService implements ProductServicePort {
     }
 
     @Override
-    public Product editProduct(ProductDTO productDTO, Long id, MultipartFile image) throws IOException {
+    public Product editProduct(ProductDTO productDTO, Long id) {
+        Product product = modelMapper.map(productDTO, Product.class);
+        product.setProductId(id);
+        return this.productRepositoryPort.save(product);
+    }
+
+    @Override
+    public Product editProductWithImage(ProductDTO productDTO, Long id, MultipartFile image) throws IOException {
         Product product = modelMapper.map(productDTO, Product.class);
         product.setProductId(id);
         if (image != null) {
@@ -66,18 +79,21 @@ public class ProductService implements ProductServicePort {
     }
 
     @Override
+    @Transactional
     public Page<Product> pageProductName(ProductCriteria productCriteria) {
         return this.productRepositoryPort.pageProductName(productCriteria);
     }
 
     @Override
+    @Transactional
     public Page<Product> pageProductType(ProductCriteria productCriteria) {
         return this.productRepositoryPort.pageProductType(productCriteria);
     }
 
     @Override
-    public Page<Product> pageProductPeremptionDate(ProductCriteria productCriteria,int noOfWeek) {
-        return this.productRepositoryPort.pageProductPeremptionDate(productCriteria,noOfWeek);
+    @Transactional
+    public Page<Product> pageProductPeremptionDate(ProductCriteria productCriteria, int noOfWeek) {
+        return this.productRepositoryPort.pageProductPeremptionDate(productCriteria, noOfWeek);
     }
 
 
@@ -86,7 +102,6 @@ public class ProductService implements ProductServicePort {
     public void deleteProduct(Long id) {
         this.productRepositoryPort.deleteProduct(id);
     }
-    
-    
+
 
 }
