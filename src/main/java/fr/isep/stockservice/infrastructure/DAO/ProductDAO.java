@@ -35,7 +35,7 @@ public class ProductDAO {
     private Date consumptionDate;
     private String allergenSet;
     @Lob
-    private byte[] image;
+    private String image;
 
 
 

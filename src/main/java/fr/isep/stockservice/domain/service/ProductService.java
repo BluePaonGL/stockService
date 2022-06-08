@@ -31,14 +31,14 @@ public class ProductService implements ProductServicePort {
         return this.productRepositoryPort.save(product);
     }
 
-    @Override
-    public Product saveProductWithImage(ProductDTO productDTO, MultipartFile image) throws IOException {
+  /*   @Override
+   public Product saveProductWithImage(ProductDTO productDTO, MultipartFile image) throws IOException {
         Product product = modelMapper.map(productDTO, Product.class);
         if (image != null) {
             product.setImage(image.getBytes());
         }
         return this.productRepositoryPort.save(product);
-    }
+    }*/
 
     @Override
     public Product editProduct(ProductDTO productDTO, Long id) {
@@ -47,7 +47,7 @@ public class ProductService implements ProductServicePort {
         return this.productRepositoryPort.save(product);
     }
 
-    @Override
+   /* @Override
     public Product editProductWithImage(ProductDTO productDTO, Long id, MultipartFile image) throws IOException {
         Product product = modelMapper.map(productDTO, Product.class);
         product.setProductId(id);
@@ -55,7 +55,7 @@ public class ProductService implements ProductServicePort {
             product.setImage(image.getBytes());
         }
         return this.productRepositoryPort.save(product);
-    }
+    }*/
 
     @Override
     @Transactional

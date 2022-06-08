@@ -19,7 +19,7 @@ public interface ProductServicePort {
     void deleteProduct(Long id);
     Product saveProduct(ProductDTO productDTO);
     Product editProduct(ProductDTO productDTO, Long id);
-    Product saveProductWithImage(ProductDTO productDTO, MultipartFile image) throws IOException;
+    //Product saveProductWithImage(ProductDTO productDTO, MultipartFile image) throws IOException;
 
-    Product editProductWithImage(ProductDTO productDTO, Long id, MultipartFile image) throws IOException;
+    //Product editProductWithImage(ProductDTO productDTO, Long id, MultipartFile image) throws IOException;
 }

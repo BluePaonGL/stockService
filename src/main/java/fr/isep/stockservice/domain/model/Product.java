@@ -15,7 +15,7 @@ public class Product {
     private Date peremptionDate;
     private Date consumptionDate;
     private String allergenSet;
-    private byte[] image;
+    private String image;
 
     public String addAllergen(String allergen) {
         if (allergenSet.isEmpty()) {
